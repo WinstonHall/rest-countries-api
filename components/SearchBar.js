@@ -1,8 +1,8 @@
 import React from 'react';
 
-const SearchBar = ({value, filterCountries}) => {
+const SearchBar = ({value, setValue}) => {
     const handleOnChange = (e) => {
-        filterCountries('searchBarInput', e.target.value)
+        setValue(e.target.value)
     }
     return (
         <label htmlFor={'search-bar'}>

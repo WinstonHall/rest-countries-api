@@ -2,7 +2,8 @@ import SearchBar from "../components/SearchBar";
 import FilterDropdown from "../components/FilterDropdown";
 import CountryCardsContainer from "../components/CountryCardsContainer";
 import CountryCard from "../components/CountryCard";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {lowercaseIncludes, lowercaseIsEqual} from "../helpers/filterFunctions";
 
 export default function Home({data}) {
     //Input State
@@ -10,19 +11,34 @@ export default function Home({data}) {
     const [filterValue, setFilterValue] = useState('');
     //
     const [filteredCountries, setFilteredCountries] = useState(null)
-    const filterCountries = (state, value) => {
-        if (state === 'filterValue') setFilterValue(value);
-        if (state === 'searchBarInput') setSearchBarInput(value);
-        if (filterValue.length > 0 || searchBarInput.length > 0) {
-            //TODO FIX THIS SHIT
-            let filtered = data.filter(country => country.name.common.toLowerCase().includes(searchBarInput.toLowerCase()));
-            filtered = filtered.filter(country => country.region === filterValue);
-            console.log(filtered)
-            setFilteredCountries(filtered);
+
+    useEffect(() => {
+        filterCountries()
+    }, [searchBarInput, filterValue])
+
+    const filterCountries = () => {
+        let filteredArray = null;
+
+        //If both inputs are empty then set filtered countries to null
+        if (!searchBarInput.length > 0 && !filterValue.length > 0) return setFilteredCountries(filteredArray);
+
+        //If both inputs are filled out do both filters
+        if (searchBarInput.length > 0 && filterValue.length > 0) {
+            filteredArray = data.filter(c => lowercaseIncludes(c.name.common, searchBarInput))
+            filteredArray = filteredArray.filter(c => lowercaseIsEqual(c.region, filterValue))
         }
-        console.log(searchBarInput);
-        console.log(filterValue);
+        //Else only filter based on input that isn't empty
+        else {
+            searchBarInput.length > 0 ? filteredArray = data.filter(c => lowercaseIncludes(c.name.common, searchBarInput))
+                : filteredArray = data.filter(c => lowercaseIsEqual(c.region, filterValue))
+        }
+
+        //Catch for when both filters give an empty array.
+        if (filteredArray.length === 0) return setFilteredCountries(null)
+
+        setFilteredCountries(filteredArray);
     }
+
     return (
         <div>
             {/*<Head>*/}
@@ -32,18 +48,17 @@ export default function Home({data}) {
             {/*</Head>*/}
 
             <main>
-                <SearchBar value={searchBarInput} filterCountries={filterCountries}/>
-                <FilterDropdown value={filterValue} filterCountries={filterCountries}/>
+                <SearchBar value={searchBarInput} setValue={setSearchBarInput} filterCountries={filterCountries}/>
+                <FilterDropdown value={filterValue} setValue={setFilterValue} filterCountries={filterCountries}/>
                 {
                     data &&
                     (<CountryCardsContainer>
                         {/*TODO: Change index to unique identifier*/}
                         {
-                            !filteredCountries ?
-                                data.map((country, index) => {
+                            filteredCountries !== null ? filteredCountries.map((country, index) => {
                                     return <CountryCard key={index} countryData={country}/>
                                 })
-                                : filteredCountries.map((country, index) => {
+                                : data.map((country, index) => {
                                     return <CountryCard key={index} countryData={country}/>
                                 })
                         }

@@ -1,8 +1,8 @@
 import React from 'react';
 
-const FilterDropdown = ({value, filterCountries}) => {
+const FilterDropdown = ({value, setValue}) => {
     const handleOnChange = (e) => {
-        filterCountries('filterValue', e.target.value);
+        setValue(e.target.value)
     }
     return (
         <label htmlFor={'filter-dropdown'}>
