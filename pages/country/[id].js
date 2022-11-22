@@ -2,7 +2,7 @@ import React from 'react';
 import Link from "next/link";
 
 const country = ({data}) => {
-    console.log(data);
+    // console.log(data);
     const {
         flags,
         name: {common, nativeName},
@@ -14,7 +14,7 @@ const country = ({data}) => {
         subregion,
         languages,
         borders
-    } = data[0];
+    } = data;
 
     const languagesString = (languages) => {
         const values = Object.values(languages);
@@ -51,7 +51,7 @@ const country = ({data}) => {
                 <div>
                     <p>Border Countries:</p>
                     <div>
-                        {borders.map((border, index) => <Link href={`/country/${border}`}
+                        {borders.map((border, index) => <Link href={`/country/${border}?byCode=1`}
                                                               key={index}>{border}</Link>)}
                     </div>
                 </div>
@@ -78,14 +78,26 @@ export default country;
 
 export async function getServerSideProps(context) {
     const id = context.params.id;
+    const code = context.query.byCode;
+    console.log(`Code ${code}`)
+    let data;
 
-    const response = await fetch(`https://restcountries.com/v3.1/name/${id}?fields=name,capital,subregion,languages,tld,flags,population,currencies,borders,region`);
-    //?fields=name,capital,subregion,languages,tld,flags,population,currencies,borders
-    const parsedResponse = await response.json();
+    //Search for country by code route if code is 1 else by name
+    if (parseInt(code) === 1) {
+        const response = await fetch(`https://restcountries.com/v3.1/alpha/${id}?fields=name,capital,subregion,languages,tld,flags,population,currencies,borders,region`);
 
+        data = await response.json();
+    } else {
+        const response = await fetch(`https://restcountries.com/v3.1/name/${id}?fields=name,capital,subregion,languages,tld,flags,population,currencies,borders,region`);
+
+        //This route returns an array with an object
+        data = await response.json().then(results => results[0]);
+    }
+    console.log(`Data`)
+    console.log(data)
     return {
         props: {
-            data: parsedResponse
+            data
         }
     }
 }
