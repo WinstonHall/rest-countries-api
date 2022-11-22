@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from "next/link";
 
 const country = ({data}) => {
     console.log(data);
@@ -14,6 +15,20 @@ const country = ({data}) => {
         languages,
         borders
     } = data[0];
+
+    const languagesString = (languages) => {
+        const values = Object.values(languages);
+        let newString = ''
+
+        values.forEach((value, index) => {
+            values.length - 1 === index
+                ? newString += `${value}`
+                : newString += `${value}, `
+        });
+
+        return newString
+    };
+
     return (
         <div>
             <button>{"<--"}Back</button>
@@ -23,19 +38,21 @@ const country = ({data}) => {
             <div>
                 <h3>{common}</h3>
                 <div>
-                    <p>Native Name: {nativeName.ara.official}</p>
+                    <p>Native Name: {nativeName[Object.keys(nativeName)[0]].official}</p>
                     <p>Population: {population}</p>
                     <p>Region: {region}</p>
                     <p>Sub Region: {subregion}</p>
                     <p>Capital: {capital[0]}</p>
                     <p>Top Level Domain: {tld[0]}</p>
-                    <p>Currencies: {currencies.MRU.name}</p>
-                    <p>Languages: {languages.ara}</p>
+                    <p>Currencies: {currencies[Object.keys(currencies)[0]].name}</p>
+                    <p>Languages: {languagesString(languages)}</p>
+
                 </div>
                 <div>
                     <p>Border Countries:</p>
                     <div>
-                        {borders.map((border, index) => <button key={index}>{border}</button>)}
+                        {borders.map((border, index) => <Link href={`/country/${border}`}
+                                                              key={index}>{border}</Link>)}
                     </div>
                 </div>
             </div>
