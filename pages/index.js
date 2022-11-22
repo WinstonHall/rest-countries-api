@@ -35,7 +35,7 @@ export default function Home({data}) {
         }
 
         //Catch for when both filters give an empty array.
-        if (filteredArray.length === 0) return setFilteredCountries(null)
+        if (filteredArray.length === 0) return setFilteredCountries([])
 
         setFilteredCountries(filteredArray);
     }
@@ -48,14 +48,14 @@ export default function Home({data}) {
             {/*  <link rel="icon" href="/favicon.ico" />*/}
             {/*</Head>*/}
             <main>
-                <SearchBar value={searchBarInput} setValue={setSearchBarInput} filterCountries={filterCountries}/>
-                <FilterDropdown value={filterValue} setValue={setFilterValue} filterCountries={filterCountries}/>
+                <SearchBar value={searchBarInput} setValue={setSearchBarInput}/>
+                <FilterDropdown value={filterValue} setValue={setFilterValue}/>
                 {
                     data &&
                     (<CountryCardsContainer>
                         {/*TODO: Change index to unique identifier*/}
                         {
-                            filteredCountries !== null ? filteredCountries.map((country, index) => {
+                            filteredCountries ? filteredCountries.map((country, index) => {
                                     return <CountryCard key={index} countryData={country}/>
                                 })
                                 : data.map((country, index) => {

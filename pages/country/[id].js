@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from "next/link";
+import Router from "next/router";
 
 const country = ({data}) => {
     // console.log(data);
@@ -31,7 +32,7 @@ const country = ({data}) => {
 
     return (
         <div>
-            <button>{"<--"}Back</button>
+            <button onClick={() => Router.back()}>{"<--"}Back</button>
             <div>
                 <img src={flags.svg} alt={'Missing image'}/>
             </div>
