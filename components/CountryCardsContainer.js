@@ -2,7 +2,7 @@ import React from 'react';
 
 const CountryCardsContainer = ({children}) => {
     return (
-        <div>
+        <div className={"country-cards-container"}>
             {children}
         </div>
     );

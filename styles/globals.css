@@ -1,26 +1,154 @@
+@font-face {
+    src: url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;600;800&display=swap');
+    font-family: "Nunito";
+}
+
+:root {
+    --dark-mode-elements: #2b3945;
+    --dark-mode-background: #202c37;
+    --dark-mode-text: #ffffff;
+    --light-mode-text: #111517;
+    --light-mode-input: #858585;
+    --light-mode-background: #fafafa;
+    --light-mode-elements: #ffffff;
+    --font-light: 300;
+    --font-medium: 600;
+    --font-bold: 800;
+}
+
 html,
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    padding: 0;
+    margin: 0;
+    font-family: "Nunito", Nunito, sans-serif;
+    font-weight: normal;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+    color: inherit;
+    text-decoration: none;
 }
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
+.main {
+    /*padding: 0 4vw;*/
+}
+
+.app-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.background {
+    background: #202c37;
+}
+
+.element {
+    background: var(--dark-mode-elements);
+}
+
+.text {
+    color: var(--dark-mode-text);
+}
+
+.bold-text {
+    font-weight: var(--font-bold);
+}
+
+.medium-text {
+    font-weight: var(--font-medium);
+}
+
+.light-text {
+    font-weight: var(--font-light);
+}
+
+.headbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 4vw;
+    background: var(--dark-mode-elements);
+    margin-bottom: 40px;
+}
+
+
+.inputs {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 4vw;
+    margin-bottom: 40px;
+}
+
+.input {
+    width: 400px;
+    height: 40px;
+    border-radius: 5px;
+    background: #2b3945;
+    border: var(--dark-mode-elements);
+    color: var(--dark-mode-text);
+    padding: 20px;
+}
+
+.drop-down {
+    width: 200px;
+    height: 40px;
+    padding: 10px;
+    background: #2b3945;
+    border: var(--dark-mode-elements);
+    color: var(--dark-mode-text);
+}
+
+.label {
+
+}
+
+.country-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 96vw;
+    /*gap: 40px;*/
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 4vw;
+    gap: 60px;
+
+}
+
+.country-card {
+    max-width: 300px;
+    border-radius: 5px;
+    background: var(--dark-mode-elements);
+}
+
+.country-card p {
+    margin: 5px 0;
+    font-weight: var(--font-medium);
+}
+
+.country-card span {
+    font-size: 14px;
+    font-weight: var(--font-light);
+}
+
+.flag {
+    border-radius: 5px 5px 0 0;
+    min-width: 300px;
+    max-width: 300px;
+    max-height: 200px;
+    min-height: 200px;
+    contain: content;
+}
+
+.flag img {
+    size: inherit;
+    width: inherit;
+}
+
+.country-card-info {
+    padding: 30px;
 }

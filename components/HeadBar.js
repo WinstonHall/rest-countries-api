@@ -2,9 +2,9 @@ import React from 'react';
 
 const HeadBar = () => {
     return (
-        <div>
+        <div className={"headbar"}>
             <h3>Where in the world?</h3>
-            <button>DarkModeButtonTemp</button>
+            <span>Dark Mode</span>
         </div>
     );
 };

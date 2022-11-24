@@ -30,18 +30,15 @@ Fonts
 Family: Nunito Sans
 Weights: 300, 600, 800
 */
-:root {
-    /*url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;600;800&display=swap');*/
-    --dark-mode-elements: hsl(209, 23%, 22%);
-    --dark-mode-background: hsl(207, 26%, 17%);
-    --dark-mode-text: hsl(0, 0%, 100%);
-    --light-mode-text: hsl(200, 15%, 8%);
-    --light-mode-input: hsl(0, 0%, 52%);
-    --light-mode-background: hsl(0, 0%, 98%);
-    --light-mode-elements: hsl(0, 0%, 100%);
-    --font-light: 300;
-    --font-medium: 600;
-    --font-bold: 800;
-
-    font-family: Nunito, SansSerif, serif;
-}
+/*:root {*/
+/*    --dark-mode-elements: #2b3945;*/
+/*    --dark-mode-background: #202c37;*/
+/*    --dark-mode-text: #ffffff;*/
+/*    --light-mode-text: #111517;*/
+/*    --light-mode-input: #858585;*/
+/*    --light-mode-background: #fafafa;*/
+/*    --light-mode-elements: #ffffff;*/
+/*    --font-light: 300;*/
+/*    --font-medium: 600;*/
+/*    --font-bold: 800;*/
+/*}*/

@@ -5,8 +5,9 @@ const SearchBar = ({value, setValue}) => {
         setValue(e.target.value)
     }
     return (
-        <label htmlFor={'search-bar'}>
+        <label htmlFor={'search-bar'} className={"label"}>
             <input
+                className={"input"}
                 placeholder={'Search for a country'}
                 type={"text"}
                 value={value}
