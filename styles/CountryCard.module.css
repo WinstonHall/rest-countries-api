@@ -1,0 +1,32 @@
+.country_card {
+    max-width: 300px;
+    border-radius: 5px;
+    background: var(--dark-mode-elements);
+}
+
+.country_card p {
+    margin: 5px 0;
+    font-weight: var(--font-medium);
+}
+
+.country_card span {
+    font-size: 14px;
+    font-weight: var(--font-light);
+}
+
+.flag_container {
+    border-radius: 5px 5px 0 0;
+    min-width: 300px;
+    max-width: 300px;
+    max-height: 200px;
+    min-height: 200px;
+    contain: content;
+}
+
+.flag {
+    object-fit: cover
+}
+
+.country_card_info {
+    padding: 0 30px 30px 30px;
+}

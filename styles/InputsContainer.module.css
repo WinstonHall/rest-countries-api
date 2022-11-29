@@ -1,0 +1,6 @@
+.inputs {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 4vw;
+    margin-bottom: 40px;
+}

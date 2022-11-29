@@ -1,12 +1,43 @@
 import React from 'react';
 import Link from "next/link";
 import Router from "next/router";
+import Image from "next/image";
+import styles from '../../styles/CountryPage.module.css'
 
 const country = ({data}) => {
-    // console.log(data);
+    return (
+        <div className={styles.parent}>
+            <BackButton/>
+            <div className={styles.container}>
+                <FlagContainer data={data}/>
+                <div className={styles.info_container}>
+                    <h2>{data.name.common}</h2>
+                    <InfoSection data={data}/>
+                    <div className={styles.info_borders_links_container}>
+                        <p>Border Countries:</p>
+                        <BorderCountriesButtons data={data}/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+const BackButton = () => {
+    return <button className={styles.button} onClick={() => Router.back()}>{"<--"}Back</button>
+}
+
+const FlagContainer = ({data}) => {
+    return (
+        <div className={styles.flag}>
+            <Image src={data.flags.svg} alt={"Image Missing"} fill style={{objectFit: 'contain',}}/>
+        </div>
+    )
+}
+
+const InfoSection = ({data}) => {
     const {
-        flags,
-        name: {common, nativeName},
+        name: {nativeName},
         population,
         tld,
         currencies,
@@ -14,7 +45,6 @@ const country = ({data}) => {
         region,
         subregion,
         languages,
-        borders
     } = data;
 
     const languagesString = (languages) => {
@@ -29,58 +59,38 @@ const country = ({data}) => {
 
         return newString
     };
-
     return (
-        <div>
-            <button onClick={() => Router.back()}>{"<--"}Back</button>
+        <div className={styles.info_section}>
             <div>
-                <img src={flags.svg} alt={'Missing image'}/>
+                <p>Native Name: <span>{nativeName[Object.keys(nativeName)[0]].official}</span></p>
+                <p>Population: <span>{population}</span></p>
+                <p>Region: <span>{region}</span></p>
+                <p>Sub Region: <span>{subregion}</span></p>
+                <p>Capital: <span>{capital[0]}</span></p>
             </div>
             <div>
-                <h3>{common}</h3>
-                <div>
-                    <p>Native Name: {nativeName[Object.keys(nativeName)[0]].official}</p>
-                    <p>Population: {population}</p>
-                    <p>Region: {region}</p>
-                    <p>Sub Region: {subregion}</p>
-                    <p>Capital: {capital[0]}</p>
-                    <p>Top Level Domain: {tld[0]}</p>
-                    <p>Currencies: {currencies[Object.keys(currencies)[0]].name}</p>
-                    <p>Languages: {languagesString(languages)}</p>
-
-                </div>
-                <div>
-                    <p>Border Countries:</p>
-                    <div>
-                        {borders.map((border, index) => <Link href={`/country/${border}?byCode=1`}
-                                                              key={index}>{border}</Link>)}
-                    </div>
-                </div>
+                <p>Top Level Domain: <span>{tld[0]}</span></p>
+                <p>Currencies: <span>{currencies[Object.keys(currencies)[0]].name}</span></p>
+                <p>Languages: <span>{languagesString(languages)}</span></p>
             </div>
         </div>
-    );
+    )
 };
 
-export default country;
+const BorderCountriesButtons = ({data}) => {
+    return (
+        <div className={styles.info_borders_links}>
+            {data.borders.map((border, index) => <Link href={`/country/${border}?byCode=1`}
+                                                       key={index}>{border}</Link>)}
+        </div>
+    )
+}
 
-//Back Button to Home Page
-//Flag -
-//Name -
-//NativeName -
-//Population -
-//Region -
-//Sub Region -
-//Capital -
-//Top Level Domain -
-//Currencies -
-//Languages -
-//Border Countries
-//Border Countries are links to those countries pages
+export default country;
 
 export async function getServerSideProps(context) {
     const id = context.params.id;
     const code = context.query.byCode;
-    console.log(`Code ${code}`)
     let data;
 
     //Search for country by code route if code is 1 else by name
@@ -94,8 +104,7 @@ export async function getServerSideProps(context) {
         //This route returns an array with an object
         data = await response.json().then(results => results[0]);
     }
-    console.log(`Data`)
-    console.log(data)
+
     return {
         props: {
             data

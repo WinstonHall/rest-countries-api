@@ -1,0 +1,8 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 4vw;
+    background: var(--dark-mode-elements);
+    margin-bottom: 40px;
+}
