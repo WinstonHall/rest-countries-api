@@ -1,0 +1,25 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.container div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.container p {
+    font-weight: var(--font-medium);
+}
+
+.container span {
+    font-weight: var(--font-light);
+}
+
+@media (min-width: 1260px) {
+    .container {
+        flex-direction: row;
+    }
+}

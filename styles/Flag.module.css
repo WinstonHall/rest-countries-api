@@ -1,0 +1,7 @@
+.flag_container {
+    /*margin: auto;*/
+}
+
+.flag {
+    object-fit: cover;
+}

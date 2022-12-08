@@ -1,13 +1,15 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {HiOutlineMagnifyingGlass} from "react-icons/hi2";
 import styles from '../styles/SearchBar.module.css'
+import {Ctx} from "../pages/_app";
 
 const SearchBar = ({value, setValue}) => {
+    const {darkMode} = useContext(Ctx);
     const handleOnChange = (e) => {
         setValue(e.target.value)
     }
     return (
-        <label htmlFor={'search-bar'} className={styles.label}>
+        <label htmlFor={'search-bar'} className={`${styles.label} ${!darkMode ? styles.light : styles.dark}`}>
             <HiOutlineMagnifyingGlass className={styles.search_icon}/>
             <input
                 className={styles.input}

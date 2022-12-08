@@ -1,92 +1,31 @@
-import React from 'react';
-import Link from "next/link";
-import Router from "next/router";
-import Image from "next/image";
+import React, {useContext} from 'react';
 import styles from '../../styles/CountryPage.module.css'
+import BackButton from "../../components/BackButton";
+import InfoSection from "../../components/InfoSection";
+import BorderCountries from "../../components/BorderCountries";
+import {Ctx} from "../_app";
 
-const country = ({data}) => {
+const Country = ({data}) => {
+    const {darkMode} = useContext(Ctx)
     return (
-        <div className={styles.parent}>
-            <BackButton/>
-            <div className={styles.container}>
-                <FlagContainer data={data}/>
+        <div style={{minHeight: '100vh'}} className={`${!darkMode ? styles.light : styles.dark}`}>
+            <div className={styles.parent}>
+                <BackButton/>
                 <div className={styles.info_container}>
-                    <h2>{data.name.common}</h2>
-                    <InfoSection data={data}/>
-                    <div className={styles.info_borders_links_container}>
-                        <p>Border Countries:</p>
-                        <BorderCountriesButtons data={data}/>
+                    <img src={data.flags.svg} alt={`${data.name.common}'s flag`} className={styles.info_flag}/>
+                    <div className={styles.info}>
+                        <h3>{data.name.common}</h3>
+                        <InfoSection data={data}/>
+                        <BorderCountries data={data}/>
                     </div>
+
                 </div>
             </div>
         </div>
     );
 };
 
-const BackButton = () => {
-    return <button className={styles.button} onClick={() => Router.back()}>{"<--"}Back</button>
-}
-
-const FlagContainer = ({data}) => {
-    return (
-        <div className={styles.flag}>
-            <Image src={data.flags.svg} alt={"Image Missing"} fill style={{objectFit: 'contain',}}/>
-        </div>
-    )
-}
-
-const InfoSection = ({data}) => {
-    const {
-        name: {nativeName},
-        population,
-        tld,
-        currencies,
-        capital,
-        region,
-        subregion,
-        languages,
-    } = data;
-
-    const languagesString = (languages) => {
-        const values = Object.values(languages);
-        let newString = ''
-
-        values.forEach((value, index) => {
-            values.length - 1 === index
-                ? newString += `${value}`
-                : newString += `${value}, `
-        });
-
-        return newString
-    };
-    return (
-        <div className={styles.info_section}>
-            <div>
-                <p>Native Name: <span>{nativeName[Object.keys(nativeName)[0]].official}</span></p>
-                <p>Population: <span>{population}</span></p>
-                <p>Region: <span>{region}</span></p>
-                <p>Sub Region: <span>{subregion}</span></p>
-                <p>Capital: <span>{capital[0]}</span></p>
-            </div>
-            <div>
-                <p>Top Level Domain: <span>{tld[0]}</span></p>
-                <p>Currencies: <span>{currencies[Object.keys(currencies)[0]].name}</span></p>
-                <p>Languages: <span>{languagesString(languages)}</span></p>
-            </div>
-        </div>
-    )
-};
-
-const BorderCountriesButtons = ({data}) => {
-    return (
-        <div className={styles.info_borders_links}>
-            {data.borders.map((border, index) => <Link href={`/country/${border}?byCode=1`}
-                                                       key={index}>{border}</Link>)}
-        </div>
-    )
-}
-
-export default country;
+export default Country;
 
 export async function getServerSideProps(context) {
     const id = context.params.id;

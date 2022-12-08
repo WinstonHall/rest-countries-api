@@ -16,12 +16,34 @@
     --font-bold: 800;
 }
 
+h1 {
+    font-size: 26px;
+    margin: 0;
+}
+
+h2 {
+    font-size: 22px;
+    margin: 0;
+}
+
+h3 {
+    font-size: 18px;
+    margin: 0;
+}
+
+h1, h2, h3, h4, p {
+    margin: 0;
+}
+
 html,
 body {
     padding: 0;
     margin: 0;
     font-family: "Nunito", Nunito, sans-serif;
     font-weight: normal;
+    /*background: var(--dark-mode-background);*/
+    color: var(--dark-mode-text);
+    font-size: 14px;
 }
 
 a {
@@ -34,14 +56,8 @@ a {
 }
 
 
-.app-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-}
-
 .background {
-    background: #202c37;
+    background: var(--dark-mode-background);
 }
 
 .element {
@@ -64,15 +80,3 @@ a {
     font-weight: var(--font-light);
 }
 
-.dark-mode-button {
-    background: transparent;
-    border: transparent;
-    color: var(--dark-mode-text);
-    display: flex;
-    /*align-items: center;*/
-    gap: 10px;
-}
-
-.dark-mode-button:hover {
-    cursor: pointer;
-}

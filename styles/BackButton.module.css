@@ -1,0 +1,18 @@
+.back_button {
+    border-radius: 5px;
+    width: 100px;
+    height: 30px;
+    margin: 30px 0;
+    padding: 0;
+}
+
+.dark {
+    background: var(--dark-mode-elements);
+    border-color: var(--dark-mode-elements);
+    color: var(--dark-mode-text);
+}
+
+.light {
+    background: var(--light-mode-background);
+    border-color: var(--light-mode-elements);
+}

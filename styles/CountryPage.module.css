@@ -1,78 +1,77 @@
 .parent {
-    height: 85vh;
-    margin: 0 4vw;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin: 0 auto;
 }
 
-.button {
-    background: var(--dark-mode-elements);
-    border-color: var(--dark-mode-elements);
+.light {
+    background: var(--light-mode-background);
+    color: var(--light-mode-text);
+}
+
+.dark {
+    background: var(--dark-mode-background);
     color: var(--dark-mode-text);
-    width: 125px;
-    height: 40px;
-    border-radius: 5px;
-}
-
-.container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 100px;
-}
-
-.flag {
-    border-radius: 5px 5px 0 0;
-    min-width: 900px;
-    max-width: 900px;
-    /*width: 50%;*/
-    max-height: 515px;
-    min-height: 515px;
-    contain: content;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .info_container {
-    width: 700px;
     display: flex;
     flex-direction: column;
-
+    gap: 30px;
 }
 
-.info_section {
+.info {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 20px;
 }
 
-.info_section p {
-    font-weight: var(--font-medium);
+
+@media (min-width: 640px) {
+    .parent {
+        width: 620px;
+        justify-content: center;
+    }
+
+    .info_container {
+
+    }
+
+    .info_flag {
+        width: 500px;
+    }
 }
 
-.info_section span {
-    font-weight: var(--font-light);
+@media (min-width: 950px) {
+    .parent {
+        width: 920px;
+    }
+
+    .info_container {
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+
+    .info_flag {
+        width: 550px;
+    }
 }
 
-.info_borders_links_container {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 10px;
-    /*width: 100%;*/
-    margin-top: 80px;
-    font-weight: var(--font-medium);
-}
+@media (min-width: 1260px) {
+    .parent {
+        width: 1240px;
+    }
 
-.info_borders_links {
-    display: flex;
-    gap: 10px;
-}
+    .info_container {
+        justify-content: space-between;
+    }
 
-.info_borders_links a {
-    background: var(--dark-mode-elements);
-    width: 90px;
-    text-align: center;
-    padding: 5px;
-    border-radius: 5px;
-    font-weight: var(--font-light);
-    font-size: 14px;
+    .info {
+        gap: 40px;
+    }
+
+    .info_flag {
+        width: 650px;
+    }
 }

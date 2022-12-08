@@ -1,0 +1,33 @@
+.info_borders_links_container {
+    display: flex;
+    flex-direction: column;
+    font-weight: var(--font-medium);
+    gap: 10px;
+}
+
+.info_borders_links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.info_borders_links a {
+    background: var(--dark-mode-elements);
+    text-align: center;
+    border-radius: 2px;
+    font-weight: var(--font-light);
+    width: 100px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px black;
+}
+
+.light a {
+    background: var(--light-mode-elements);
+}
+
+.dark a {
+    background: var(--dark-mode-elements);
+}
