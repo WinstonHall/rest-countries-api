@@ -8,35 +8,30 @@ import {Ctx} from "./_app";
 
 export default function Home({data}) {
     const {darkMode} = useContext(Ctx);
-    //Input State
+
     const [searchBarInput, setSearchBarInput] = useState('')
     const [filterValue, setFilterValue] = useState('');
-    //
+
     const [filteredCountries, setFilteredCountries] = useState(null)
 
     useEffect(() => {
         filterCountries()
     }, [searchBarInput, setSearchBarInput, filterValue, setFilterValue])
 
-    //TODO: Abstract this to its own helpers/file or helpers/filterFunctions.js
+
     const filterCountries = () => {
         let filteredArray = null;
 
-        //If both inputs are empty then set filtered countries to null
         if (!searchBarInput.length > 0 && !filterValue.length > 0) return setFilteredCountries(filteredArray);
 
-        //If both inputs are filled out do both filters
         if (searchBarInput.length > 0 && filterValue.length > 0) {
             filteredArray = data.filter(c => lowercaseIncludes(c.name.common, searchBarInput))
             filteredArray = filteredArray.filter(c => lowercaseIsEqual(c.region, filterValue))
-        }
-        //Else only filter based on input that isn't empty
-        else {
+        } else {
             searchBarInput.length > 0 ? filteredArray = data.filter(c => lowercaseIncludes(c.name.common, searchBarInput))
                 : filteredArray = data.filter(c => lowercaseIsEqual(c.region, filterValue))
         }
 
-        //Catch for when both filters give an empty array.
         if (filteredArray.length === 0) return setFilteredCountries([])
 
         setFilteredCountries(filteredArray);

@@ -56,27 +56,5 @@ a {
 }
 
 
-.background {
-    background: var(--dark-mode-background);
-}
 
-.element {
-    background: var(--dark-mode-elements);
-}
-
-.text {
-    color: var(--dark-mode-text);
-}
-
-.bold-text {
-    font-weight: var(--font-bold);
-}
-
-.medium-text {
-    font-weight: var(--font-medium);
-}
-
-.light-text {
-    font-weight: var(--font-light);
-}
 
